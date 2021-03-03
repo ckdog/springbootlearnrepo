@@ -4,3 +4,35 @@ spring:
     fallback-to-system-locale: false
   thymeleaf:
     cache: false
+  datasource:
+    druid:
+    username: root
+    password: root
+    url: jdbc:mysql://192.168.183.3/health
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    #配置数据源属性  对应dataSourceProperties中数据源属性
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: SELECT 1 FROM DUAL
+    testWileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #配置监控同级拦截的Filters, 去掉后监控界面sql无法统计， wall用于防火墙   filters属性如果添加log4j就会报错
+    filters: stat,wall
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+  redis:
+    host: 192.168.183.3
+    port: 6379
+logging:
+  level:
+    com: debug
